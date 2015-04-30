@@ -43,6 +43,19 @@ return [
     |
     */
 
-    'countries' => ['us', 'gb', 'es']
+    'countries' => ['us', 'gb', 'es'],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Countries Languages
+    |--------------------------------------------------------------------------
+    |
+    | Countries according to the chosen language 'lang' => 'country'
+    |
+    | Example Settings: 'en' => 'us', 'fr' => 'fr', 'de' => 'de', 'es' => 'es', 'ja' => 'jp', 'zn' => 'cn', 'ru' => 'ru', 'pt' => 'pt' etc.
+    |
+    */
+
+    'countryLang' => ['en' => 'us', 'es' => 'es']
 
 ];
