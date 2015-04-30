@@ -14,6 +14,8 @@ class SetLangLocaleUser {
      */
     public function handle($request, Closure $next)
     {
+        if(!config('langlocale.urlType')) return $next($request);
+
         // get lang property
         if($request->segment(1) != null)
         {
