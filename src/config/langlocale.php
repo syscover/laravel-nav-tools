@@ -10,10 +10,39 @@ return [
 	| the language or locale or both.
 	| If select false, the plugin will be deactivated
     |
-	| Available Settings: "lang", "locale", "langlocale", false
+	| Available Settings: 'lang', 'locale', 'langlocale', false
 	|
 	*/
 
-    'urlType' => false
+    'urlType' => false,
+
+    /*
+	|--------------------------------------------------------------------------
+	| Languages
+	|--------------------------------------------------------------------------
+	|
+	| Available languages that you have in your web.
+    | Values has in ISO 639-1.
+    |
+	| Example Settings: 'en', 'fr', 'de', 'es', 'ja', 'zh', 'ru', 'pt' etc.
+	|
+	*/
+
+    'langs' => ['en', 'es'],
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Countries
+    |--------------------------------------------------------------------------
+    |
+    | Available countries that you have in your web.
+    | Values has in ISO 3166.
+    |
+    | Example Settings: 'us', 'gb', 'fr', 'de', 'es', 'jp', 'cn', 'ru', 'pt' etc.
+    |
+    */
+
+    'countries' => ['us', 'gb', 'es']
 
 ];
