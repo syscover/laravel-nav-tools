@@ -1,18 +1,19 @@
 <?php namespace Syscover\Langlocale\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\App;
 
 class SetLangLocaleUser {
 
-	/**
-	 * Handle an incoming request.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \Closure  $next
-	 * @return mixed
-	 */
-	public function handle($request, Closure $next)
-	{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
         // get lang property
         if($request->segment(1) != null)
         {
@@ -31,7 +32,7 @@ class SetLangLocaleUser {
         }
 
         // routine to set variables if we have cookies, set in session variables
-        elseif(Cookie::get('langUser') != null && Cookie::get('countryUser') != null)
+        elseif(cookie('langUser') != null && cookie('countryUser') != null)
         {
             session('langUser', cookie('langUser'));
             session('countryUser', cookie('countryUser'));
@@ -51,23 +52,23 @@ class SetLangLocaleUser {
             /****
             if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
             {
-                //$browserLang = substr($_SERVER["HTTP_ACCEPT_LANGUAGE"],0,2);
-                $browserLang = Pulsar\Pulsar\Libraries\Miscellaneous::preferedLanguage(Config::get('web.webLang'));
+            //$browserLang = substr($_SERVER["HTTP_ACCEPT_LANGUAGE"],0,2);
+            $browserLang = Pulsar\Pulsar\Libraries\Miscellaneous::preferedLanguage(Config::get('web.webLang'));
 
-                //instanciamos el idioma del navegador, y nos aseguramos de instanciar un pais según el idioma del navegador en caso de no estar instanciado
-                if(in_array($browserLang, Config::get('web.webLang')))
-                {
-                    $language = $browserLang;
-                }
-                else
-                {
-                    $language = Config::get('web.defaultLang');
-                }
+            //instanciamos el idioma del navegador, y nos aseguramos de instanciar un pais según el idioma del navegador en caso de no estar instanciado
+            if(in_array($browserLang, Config::get('web.webLang')))
+            {
+            $language = $browserLang;
             }
             else
             {
-                //en caso de no detectar dicha variable, la instanciamos el idioma por defecto
-                $language = Config::get('web.defaultLang');
+            $language = Config::get('web.defaultLang');
+            }
+            }
+            else
+            {
+            //en caso de no detectar dicha variable, la instanciamos el idioma por defecto
+            $language = Config::get('web.defaultLang');
             }
 
             // RUTINA PARA AVERIGUAR EL PAÍS
@@ -77,27 +78,23 @@ class SetLangLocaleUser {
 
             if (in_array($browserCountry, Config::get('web.webCountry')))
             {
-                $country = $browserCountry;
+            $country = $browserCountry;
             }
             else
             {
-                //en el caso de no obtener un país válido, cogemos el país por defecto según el idioma
-                $country = Config::get('web.countryLang')[$language];
+            //en el caso de no obtener un país válido, cogemos el país por defecto según el idioma
+            $country = Config::get('web.countryLang')[$language];
             }
-            *****/
+             *****/
 
 
-
-
-            session('langUser', $language);
-            session('countryUser', $country);
+            //session('langUser', $language);
+            //session('countryUser', $country);
         }
 
-
-        // we establish the language environment
+        // establish environment language
         App::setLocale(session('langUser'));
 
-		return parent::handle($request, $next);
-	}
-
+        return $next($request);
+    }
 }
