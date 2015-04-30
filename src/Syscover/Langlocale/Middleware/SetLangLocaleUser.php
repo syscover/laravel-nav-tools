@@ -75,20 +75,18 @@ class SetLangLocaleUser {
             $ip = Syscover\Langlocale\Libraries\Miscellaneous::getRealIp();
             $browserCountry = Syscover\Langlocale\Libraries\Miscellaneous::getCountryIp($ip);
 
-            if (in_array($browserCountry, Config::get('web.webCountry')))
+            if (in_array($browserCountry, config('langlocale.countries')))
             {
                 $country = $browserCountry;
             }
             else
             {
-                //en el caso de no obtener un país válido, cogemos el país por defecto según el idioma
-                $country = Config::get('web.countryLang')[$lang];
+                // in the case of not getting a valid country, we take the country as default language
+                $country = config('langlocale.countryLang')[$lang];
             }
 
-
-
-            //session('langUser', $language);
-            //session('countryUser', $country);
+            session('langUser',     $lang);
+            session('countryUser',  $country);
         }
 
         // we establish the language environment
