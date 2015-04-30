@@ -70,4 +70,47 @@ class Miscellaneous
         }
         return $bestlang;
     }
+
+    /**
+     *  Función para obtener la IP real de un cliente
+     *
+     * @access	public
+     * @return	string
+     */
+    public static function getRealIp()
+    {
+        if (!empty($_SERVER['HTTP_CLIENT_IP']))
+        {
+            //check ip from share internet
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        }
+        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+        {
+            //to check ip is pass from proxy
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+        else
+        {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
+    }
+
+    /**
+     *  Función para obtener el pais del cliente según su ip
+     *
+     * @access    public
+     * @param $ip
+     * @return string
+     */
+    public static function getCountryIp($ip)
+    {
+        $apiCountry = 'http://api.hostip.info/?ip=' . $ip;
+        //$apiCountry = 'http://api.hostip.info/?ip=87.106.139.27';
+
+        $xml = new \SimpleXMLElement($apiCountry, LIBXML_NOCDATA, true);
+
+        $countries = $xml->xpath('//countryAbbrev');
+        return strtolower($countries[0]);
+    }
 }

@@ -52,29 +52,28 @@ class SetLangLocaleUser {
 
             if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
             {
+                $browserLang = Syscover\Langlocale\Libraries\Miscellaneous::preferedLanguage(config('langlocale.langs'));
 
-                $browserLang = Pulsar\Pulsar\Libraries\Miscellaneous::preferedLanguage(Config::get('web.webLang'));
-
-                //instanciamos el idioma del navegador, y nos aseguramos de instanciar un pais según el idioma del navegador en caso de no estar instanciado
-                if(in_array($browserLang, Config::get('web.webLang')))
+                // instantiate browser language
+                if(in_array($browserLang, config('langlocale.langs')))
                 {
-                    $language = $browserLang;
+                    $lang = $browserLang;
                 }
                 else
                 {
-                    $language = Config::get('web.defaultLang');
+                    $lang = config('app.locale');
                 }
             }
             else
             {
-                //en caso de no detectar dicha variable, la instanciamos el idioma por defecto
-                $language = Config::get('web.defaultLang');
+                // in this case, ser default lang
+                $lang = config('app.locale');
             }
 
-            // RUTINA PARA AVERIGUAR EL PAÍS
-            // averiguamos la IP del cliente
-            $ip = Pulsar\Pulsar\Libraries\Miscellaneous::getRealIp();
-            $browserCountry = Pulsar\Pulsar\Libraries\Miscellaneous::getCountryIp($ip);
+            // Routine to know country
+            // We find out the client's IP
+            $ip = Syscover\Langlocale\Libraries\Miscellaneous::getRealIp();
+            $browserCountry = Syscover\Langlocale\Libraries\Miscellaneous::getCountryIp($ip);
 
             if (in_array($browserCountry, Config::get('web.webCountry')))
             {
@@ -83,7 +82,7 @@ class SetLangLocaleUser {
             else
             {
                 //en el caso de no obtener un país válido, cogemos el país por defecto según el idioma
-                $country = Config::get('web.countryLang')[$language];
+                $country = Config::get('web.countryLang')[$lang];
             }
 
 
