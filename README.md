@@ -21,3 +21,21 @@
 'langlocale.pulsar' => 'Syscover\Langlocale\Middleware\SetLangLocaleUser',
 
 ```
+
+**4 - To publish package, you must type on console**
+
+```
+php artisan vendor:publish --force
+
+```
+
+**5 - on app\Http\routes.php file use this cloure to implement routes with translation**
+
+```
+Route::group(['middleware' => ['langlocale.pulsar']], function() {
+
+    // write here your routes
+
+});
+
+```

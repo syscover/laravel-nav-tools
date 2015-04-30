@@ -8,6 +8,8 @@
 |
 */
 
-Route::group(['middleware' => ['auth.pulsar','permission.pulsar']], function() {
+Route::group(['middleware' => ['langlocale.pulsar']], function() {
+
+    // write here your routes
 
 });

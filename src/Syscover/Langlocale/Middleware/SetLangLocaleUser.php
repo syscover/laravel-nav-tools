@@ -33,8 +33,8 @@ class SetLangLocaleUser {
         // routine to set variables if we have cookies, set in session variables
         elseif(Cookie::get('langUser') != null && Cookie::get('countryUser') != null)
         {
-            session('langUser', Cookie::get('langUser'));
-            session('countryUser', Cookie::get('countryUser'));
+            session('langUser', cookie('langUser'));
+            session('countryUser', cookie('countryUser'));
         }
 
         // routine to set session variables without cookies
