@@ -29,13 +29,44 @@ php artisan vendor:publish --force
 
 ```
 
-**5 - on app\Http\routes.php file use this cloure to implement routes with translation**
+**5 - Set config options on config\langlocale.php**
+
+**6 - on app\Http\routes.php file use this cloure to implement routes with translation**
 
 ```
 Route::group(['middleware' => ['langlocale.pulsar']], function() {
 
     // write here your routes
 
+});
+
+```
+
+**7 - Route configutation**
+you have several configuration options:
+
+## Write your routes with locale variable:
+
+```
+Route::group(['middleware' => ['langlocale.pulsar']], function() {
+    Route::get('/',                         function(){ return view('www.index'); });
+    Route::get('{locale}',                  function(){ return view('www.index'); });
+    Route::post('{locale}/contact',         ['as'=>'contact',  'uses'=>'FrontEndController@contact']);
+});
+
+```
+
+## Set lang variable on your routes
+
+```
+Route::group(['middleware' => ['langlocale.pulsar']], function() {
+    Route::get('/',                   function(){ return view('www.index'); });
+
+    Route::get('en',                  function(){ return view('www.index'); });
+    Route::get('es',                  function(){ return view('www.index'); });
+
+    Route::post('en/contact',         ['as'=>'contact',          'uses'=>'FrontEndController@contact']);
+    Route::post('es/contacto',        ['as'=>'contact',          'uses'=>'FrontEndController@contact']);
 });
 
 ```

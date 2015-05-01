@@ -11,6 +11,15 @@ return [
 	| If select false, the plugin will be deactivated
     |
 	| Available Settings: 'lang', 'locale', 'langlocale', false
+    |
+    | Route example with langlocale option:
+    | Route::get('en-us/init', function(){ return view('www.index'); });
+    |
+    | Route example with lang option:
+    | Route::get('en/init', function(){ return view('www.index'); });
+    |
+    | Route example with locale option:
+    | Route::get('us/init', function(){ return view('www.index'); });
 	|
 	*/
 
