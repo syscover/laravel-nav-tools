@@ -45,7 +45,7 @@ Route::group(['middleware' => ['langlocale.pulsar']], function() {
 **7 - Route configutation**
 you have several configuration options:
 
-## Write your routes with locale variable:
+Write your routes with locale variable:
 
 ```
 Route::group(['middleware' => ['langlocale.pulsar']], function() {
@@ -56,7 +56,7 @@ Route::group(['middleware' => ['langlocale.pulsar']], function() {
 
 ```
 
-## Set lang variable on your routes
+Set lang variable on your routes
 
 ```
 Route::group(['middleware' => ['langlocale.pulsar']], function() {
