@@ -11,14 +11,14 @@
 **2 - Register service provider, on file config/app.php add to providers array**
 
 ```
-'Syscover\Langlocale\LanglocaleServiceProvider',
+Syscover\Langlocale\LanglocaleServiceProvider::class,
 
 ```
 
 **3 - Register middlewares langlocale.pulsar on file app/Http/Kernel.php add to routeMiddleware array**
 
 ```
-'langlocale.pulsar' => 'Syscover\Langlocale\Middleware\SetLangLocaleUser',
+'langlocale.pulsar' => \Syscover\Langlocale\Middleware\SetLangLocaleUser::class,
 
 ```
 
