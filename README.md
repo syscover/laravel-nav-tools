@@ -25,7 +25,7 @@ Syscover\Langlocale\LanglocaleServiceProvider::class,
 **4 - To publish package, you must type on console**
 
 ```
-php artisan vendor:publish --force
+php artisan vendor:publish
 
 ```
 
