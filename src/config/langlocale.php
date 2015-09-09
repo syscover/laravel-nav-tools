@@ -23,7 +23,7 @@ return [
 	|
 	*/
 
-    'urlType' => false,
+    'urlType' => env('LANGLOCALE_URL_TYPE', false),
 
     /*
 	|--------------------------------------------------------------------------
@@ -34,10 +34,12 @@ return [
     | Values has in ISO 639-1.
     |
 	| Example Settings: 'en', 'fr', 'de', 'es', 'ja', 'zh', 'ru', 'pt' etc.
+    |
+    | you can set with array or string to explode after
 	|
 	*/
 
-    'langs' => ['en', 'es'],
+    'langs' => explode('|', env('LANGLOCALE_LANGS', 'en|es')),
 
 
     /*
@@ -52,7 +54,7 @@ return [
     |
     */
 
-    'countries' => ['us', 'gb', 'es'],
+    'countries' => explode('|', env('LANGLOCALE_COUNTRIES', 'us|gb|es')),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +67,7 @@ return [
     |
     */
 
-    'defaultCountry' => ['es'],
+    'defaultCountry' => env('LANGLOCALE_DEFAULT_COUNTRY', 'es'),
 
     /*
     |--------------------------------------------------------------------------
@@ -74,10 +76,8 @@ return [
     |
     | Countries according to the chosen language 'lang' => 'country'
     |
-    | Example Settings: 'en' => 'us', 'fr' => 'fr', 'de' => 'de', 'es' => 'es', 'ja' => 'jp', 'zn' => 'cn', 'ru' => 'ru', 'pt' => 'pt' etc.
-    |
     */
 
-    'countryLang' => ['en' => 'us', 'es' => 'es']
+    'countryLang' => ['en' => 'us', 'fr' => 'fr', 'de' => 'de', 'es' => 'es', 'ja' => 'jp', 'zn' => 'cn', 'ru' => 'ru', 'pt' => 'pt']
 
 ];

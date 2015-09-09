@@ -30,6 +30,13 @@ php artisan vendor:publish
 ```
 
 **5 - Set config options on config\langlocale.php**
+The best option is set options in environment file, with this example
+```
+LANGLOCALE_URL_TYPE=true
+LANGLOCALE_LANGS=en|es
+LANGLOCALE_COUNTRIES=us|gb|es
+LANGLOCALE_DEFAULT_COUNTRY=es
+```
 
 **6 - on app\Http\routes.php file use this cloure to implement routes with translation**
 
@@ -78,4 +85,5 @@ You can get lan and country values from session
 session('countryUser'); // to get country user
 session('langUser'); // to get language user
 ```
+
 
