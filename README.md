@@ -32,7 +32,7 @@ php artisan vendor:publish
 **5 - Set config options on config\langlocale.php**
 The best option is set options in environment file, with this example
 ```
-LANGLOCALE_URL_TYPE=true
+LANGLOCALE_URL_TYPE=lang
 LANGLOCALE_LANGS=en|es
 LANGLOCALE_COUNTRIES=us|gb|es
 LANGLOCALE_DEFAULT_COUNTRY=es
