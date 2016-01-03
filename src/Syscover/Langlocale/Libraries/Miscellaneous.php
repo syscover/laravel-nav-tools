@@ -95,27 +95,4 @@ class Miscellaneous
         }
         return $ip;
     }
-
-    /**
-     *  Función para obtener el pais del cliente según su ip
-     *
-     * @access  public
-     * @param   $ip
-     * @return  string|null
-     */
-    public static function getCountryIp($ip)
-    {
-        try
-        {
-            $apiCountry = 'http://api.hostipd.info/?ip=' . $ip;
-            $xml = new \SimpleXMLElement($apiCountry, LIBXML_NOCDATA, true);
-            $countries = $xml->xpath('//countryAbbrev');
-        }
-        catch(\Exception $e)
-        {
-            return null;
-        }
-
-        return strtolower($countries[0]);
-    }
 }

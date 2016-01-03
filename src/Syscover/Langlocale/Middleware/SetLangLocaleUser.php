@@ -90,17 +90,8 @@ class SetLangLocaleUser {
 
             if(config('langlocale.urlType') == 'langlocale' || config('langlocale.urlType') == 'locale')
             {
-                // Routine to know country
-                // We find out the client's IP
-                $ip = \Syscover\Langlocale\Libraries\Miscellaneous::getRealIp();
-                $browserCountry = \Syscover\Langlocale\Libraries\Miscellaneous::getCountryIp($ip);
-
-                if (in_array($browserCountry, config('langlocale.countries')))
-                {
-                    $country = $browserCountry;
-                }
                 // if is set locale, we get default country from locale
-                elseif(config('langlocale.urlType') == 'langlocale' || config('langlocale.urlType') == 'lang')
+                if(config('langlocale.urlType') == 'langlocale' || config('langlocale.urlType') == 'lang')
                 {
                     // in the case of not getting a valid country, we take the country as default language
                     $country = config('langlocale.countryLang')[$lang];
