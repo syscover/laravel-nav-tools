@@ -82,8 +82,8 @@ Route::group(['middleware' => ['langlocale.pulsar']], function() {
 
 You can get lan and country values from session
 ```
-session('countryUser'); // to get country user
-session('langUser'); // to get language user
+session('userCountry'); // to get country user
+session('userLang'); // to get language user
 ```
 
 

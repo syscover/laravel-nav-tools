@@ -36,28 +36,28 @@ class SetLangLocaleUser {
         // routine to establish country and language variables in session, with URL data language and country
         if (config('langlocale.urlType') == 'langlocale' && count($langLocaleData) == 2 && in_array($langLocaleData[0], config('langlocale.langs')) && in_array($langLocaleData[1], config('langlocale.countries')))
         {
-            session(['langUser'     => $langLocaleData[0]]);
-            session(['countryUser'  => $langLocaleData[1]]);
+            session(['userLang'     => $langLocaleData[0]]);
+            session(['userCountry'  => $langLocaleData[1]]);
         }
         // when only we need know user language
         elseif(config('langlocale.urlType') == 'lang' && in_array($langLocaleData, config('langlocale.langs')))
         {
-            session(['langUser' => $langLocaleData]);
+            session(['userLang' => $langLocaleData]);
         }
         // when only we need know user country
         elseif(config('langlocale.urlType') == 'locale' && in_array($langLocaleData, config('langlocale.countries')))
         {
-            session(['countryUser' => $langLocaleData]);
+            session(['userCountry' => $langLocaleData]);
         }
         // routine to set variables if we have cookies, set in session variables
-        elseif($request->cookie('langUser') != null && $request->cookie('countryUser') != null)
+        elseif($request->cookie('userLang') != null && $request->cookie('userCountry') != null)
         {
-            session('langUser',     $request->cookie('langUser'));
-            session('countryUser',  $request->cookie('countryUser'));
+            session('userLang',     $request->cookie('userLang'));
+            session('userCountry',  $request->cookie('userCountry'));
         }
 
         // routine to set session variables without cookies
-        elseif(session('langUser') == null || session('countryUser') == null)
+        elseif(session('userLang') == null || session('userCountry') == null)
         {
             if(config('langlocale.urlType') == 'langlocale' || config('langlocale.urlType') == 'lang')
             {
@@ -84,7 +84,7 @@ class SetLangLocaleUser {
                     $lang = config('app.locale');
                 }
 
-                session(['langUser' => $lang]);
+                session(['userLang' => $lang]);
             }
 
 
@@ -101,14 +101,14 @@ class SetLangLocaleUser {
                     $country = config('langlocale.defaultCountry');
                 }
 
-                session(['countryUser' => $country]);
+                session(['userCountry' => $country]);
             }
         }
 
         if(config('langlocale.urlType') == 'langlocale' || config('langlocale.urlType') == 'lang')
         {
             // we establish the language environment
-            App::setLocale(session('langUser'));
+            App::setLocale(session('userLang'));
         }
 
         return $next($request);
