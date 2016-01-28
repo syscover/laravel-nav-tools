@@ -1,6 +1,6 @@
 {
     "name": "syscover/langlocale",
-    "version": "1.0.0",
+    "version": "5.2",
     "description": "Lang Locale package",
     "keywords": ["syscover","pulsar","laravel","lang","locale"],
     "license": "MIT",
@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.5.9"
     },
     "autoload": {
         "psr-4": {
