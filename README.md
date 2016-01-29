@@ -18,7 +18,7 @@ Syscover\Langlocale\LanglocaleServiceProvider::class,
 **3 - Register middlewares langlocale.pulsar on file app/Http/Kernel.php add to routeMiddleware array**
 
 ```
-'langlocale.pulsar' => \Syscover\Langlocale\Middleware\SetLangLocaleUser::class,
+'langlocale.pulsar' => \Syscover\Langlocale\Middleware\LangLocale::class,
 
 ```
 

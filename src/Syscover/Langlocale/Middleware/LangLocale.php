@@ -3,7 +3,7 @@
 use Closure;
 use Illuminate\Support\Facades\App;
 
-class SetLangLocaleUser {
+class LangLocale {
 
     /**
      * Handle an incoming request.
