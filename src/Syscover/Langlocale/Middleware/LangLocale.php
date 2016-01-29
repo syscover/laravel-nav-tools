@@ -3,8 +3,8 @@
 use Closure;
 use Illuminate\Support\Facades\App;
 
-class LangLocale {
-
+class LangLocale
+{
     /**
      * Handle an incoming request.
      *
