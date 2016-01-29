@@ -31,8 +31,7 @@ class LangLocale
         {
             $langLocaleData = [];
         }
-
-
+        
         // routine to establish country and language variables in session, with URL data language and country
         if (config('langlocale.urlType') == 'langlocale' && count($langLocaleData) == 2 && in_array($langLocaleData[0], config('langlocale.langs')) && in_array($langLocaleData[1], config('langlocale.countries')))
         {
