@@ -15,6 +15,9 @@ class LanglocaleServiceProvider extends ServiceProvider
         $this->publishes([
             realpath(__DIR__ . '/../../config/langlocale.php') => config_path('langlocale.php')
         ]);
+
+		// include helpers file
+		include __DIR__ . '/Helpers/helpers.php';
 	}
 
 	/**

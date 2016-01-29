@@ -2,14 +2,24 @@
 
 if (! function_exists('user_lang')) {
     /**
-     * Assign user lang register.
+     * Get user lang from session.
      *
      * @return string
      */
     function user_lang()
     {
-        return session('userLang');
+        return session('userLang') === null? config('app.locale') : session('userLang');
+    }
+}
 
-        //return $array;
+if (! function_exists('user_country')) {
+    /**
+     * Get user country from session.
+     *
+     * @return string
+     */
+    function user_country()
+    {
+        return session('userCountry') === null? config('langlocale.defaultCountry') : session('userCountry');
     }
 }
