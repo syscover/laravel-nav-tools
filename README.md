@@ -1,4 +1,4 @@
-# Langlocale App to Laravel 5
+# Langlocale App to Laravel 5.2
 
 ## Installation
 
@@ -82,7 +82,7 @@ Route::group(['middleware' => ['langlocale.pulsar']], function() {
 
 You can get lang and country values with this helpers
 ```
-session('userCountry'); // to get country user
+user_country(); // to get country user
 user_lang(); // to get language user
 ```
 
