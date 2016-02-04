@@ -2,7 +2,7 @@
 
 ## Installation
 
-**1 - After install Laravel framework, insert on file composer.json, inside require object this value**
+**1 - After install Laravel framework, insert on file composer.json, inside require object this value and execute composer update**
 ```
 "syscover/langlocale": "dev-master"
 
