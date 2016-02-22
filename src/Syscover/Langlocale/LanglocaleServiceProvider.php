@@ -11,13 +11,13 @@ class LanglocaleServiceProvider extends ServiceProvider
 	 */
 	public function boot()
 	{
+		// include helpers file
+		include __DIR__ . '/Helpers/helpers.php';
+
         // register config files
         $this->publishes([
             realpath(__DIR__ . '/../../config/langlocale.php') => config_path('langlocale.php')
         ]);
-
-		// include helpers file
-		include __DIR__ . '/Helpers/helpers.php';
 	}
 
 	/**
