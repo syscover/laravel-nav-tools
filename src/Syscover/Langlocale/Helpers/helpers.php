@@ -32,6 +32,7 @@ if (! function_exists('active_menu')) {
      */
     function active_menu($routeName)
     {
+        // TODO: desconocemos el hecho que se pudeda llamar el Request directamente, sin importarlo en el LanglocaleServiceProvider
         return Request::route()->getName() == $routeName;
     }
 }
