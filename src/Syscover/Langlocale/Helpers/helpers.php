@@ -32,6 +32,6 @@ if (! function_exists('active_menu')) {
      */
     function active_menu($routeName)
     {
-        return \Illuminate\Http\Request::route()->getName() == $routeName;
+        return Request::route()->getName() == $routeName;
     }
 }
