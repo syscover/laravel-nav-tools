@@ -23,3 +23,15 @@ if (! function_exists('user_country')) {
         return session('userCountry') === null? config('langlocale.defaultCountry') : session('userCountry');
     }
 }
+
+if (! function_exists('active_menu')) {
+    /**
+     * Get user country from session.
+     *
+     * @return string
+     */
+    function active_menu($routeName)
+    {
+        return \Illuminate\Http\Request::route()->getName() == $routeName;
+    }
+}
