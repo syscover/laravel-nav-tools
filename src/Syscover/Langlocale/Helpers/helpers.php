@@ -31,7 +31,7 @@ if (! function_exists('get_lang_route_name')) {
      */
     function get_lang_route_name($lang)
     {
-        // TODO: desconocemos el hecho que se pudeda llamar el Request directamente, sin importarlo en el LanglocaleServiceProvider
+        // TODO: desconocemos como se puede llamar el Request directamente, sin importarlo en el LanglocaleServiceProvider
         $routeName      = Request::route()->getName();
         $originRoute    = substr($routeName, 0, strlen($routeName) - 2);
 
@@ -47,7 +47,7 @@ if (! function_exists('active_menu')) {
      */
     function active_menu($routeName)
     {
-        // TODO: desconocemos el hecho que se pudeda llamar el Request directamente, sin importarlo en el LanglocaleServiceProvider
+        // TODO: desconocemos como se puede llamar el Request directamente, sin importarlo en el LanglocaleServiceProvider
         return Request::route()->getName() == $routeName;
     }
 }
