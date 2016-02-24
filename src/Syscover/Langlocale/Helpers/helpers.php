@@ -35,7 +35,10 @@ if (! function_exists('get_lang_route_name')) {
         $routeName      = Request::route()->getName();
         $originRoute    = substr($routeName, 0, strlen($routeName) - 2);
 
-        return $originRoute . $lang;
+        if(Route::has($originRoute . $lang))
+            return $originRoute . $lang;
+        else
+            return $routeName;
     }
 }
 
