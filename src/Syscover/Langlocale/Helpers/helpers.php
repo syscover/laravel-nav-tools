@@ -24,6 +24,22 @@ if (! function_exists('user_country')) {
     }
 }
 
+if (! function_exists('get_lang_route')) {
+    /**
+     * Get user country from session.
+     *
+     * @return string
+     */
+    function get_lang_route($lang, $parameters = [])
+    {
+        // TODO: desconocemos el hecho que se pudeda llamar el Request directamente, sin importarlo en el LanglocaleServiceProvider
+        $routeName      = Request::route()->getName();
+        $originRoute    = substr($routeName, 0, strlen($routeName) - 2);
+
+        return route($originRoute . $lang, $parameters);
+    }
+}
+
 if (! function_exists('active_menu')) {
     /**
      * Get user country from session.
