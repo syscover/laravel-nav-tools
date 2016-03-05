@@ -16,7 +16,7 @@ class LanglocaleServiceProvider extends ServiceProvider
 
         // register config files
         $this->publishes([
-            realpath(__DIR__ . '/../../config/langlocale.php') => config_path('langlocale.php')
+            __DIR__ . '/../../config/langlocale.php' => config_path('langlocale.php')
         ]);
 	}
 
@@ -29,5 +29,4 @@ class LanglocaleServiceProvider extends ServiceProvider
 	{
         //
 	}
-
 }
