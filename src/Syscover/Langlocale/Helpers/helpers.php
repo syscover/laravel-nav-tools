@@ -48,11 +48,15 @@ if (! function_exists('get_lang_route_name')) {
 if (! function_exists('active_menu')) {
     /**
      * Get user country from session.
-     * @param   $routeName  name of route to check
+     * @param   string      $routeName          name of route to check
+     * @param   bool        $firstOccurrence    active to find first occurrence of route, this method is valid to active menu on subsections
      * @return  boolean
      */
-    function active_menu($routeName)
+    function active_menu($routeName, $firstOccurrence = false)
     {
-        return Request::route()->getName() == $routeName;
+        if($firstOccurrence)
+            return strpos(Request::url(), route($routeName)) === 0;
+        else
+            return Request::route()->getName() == $routeName;
     }
 }
