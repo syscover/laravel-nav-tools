@@ -57,6 +57,7 @@ if (! function_exists('active_menu')) {
         if($firstOccurrence)
             return strpos(Request::url(), route($routeName)) === 0;
         else
-            return Request::route()->getName() == $routeName;
+            if(Request::route() !== null)
+                return Request::route()->getName() == $routeName;
     }
 }
