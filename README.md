@@ -19,10 +19,10 @@ Syscover\Langlocale\LanglocaleServiceProvider::class,
 
 ```
 
-**3 - Register middlewares langlocale.pulsar on file app/Http/Kernel.php add to routeMiddleware array**
+**3 - Register middlewares pulsar.langlocale on file app/Http/Kernel.php add to routeMiddleware array**
 
 ```
-'langlocale.pulsar' => \Syscover\Langlocale\Middleware\LangLocale::class,
+'pulsar.langlocale' => \Syscover\Langlocale\Middleware\LangLocale::class,
 
 ```
 
@@ -45,7 +45,7 @@ LANGLOCALE_DEFAULT_COUNTRY=es
 **6 - on app\Http\routes.php file use this cloure to implement routes with translation**
 
 ```
-Route::group(['middleware' => ['langlocale.pulsar']], function() {
+Route::group(['middleware' => ['pulsar.langlocale']], function() {
 
     // write here your routes
 
@@ -59,7 +59,7 @@ you have several configuration options:
 Write your routes with locale variable:
 
 ```
-Route::group(['middleware' => ['langlocale.pulsar']], function() {
+Route::group(['middleware' => ['pulsar.langlocale']], function() {
     Route::get('/',                         function(){ return view('www.index'); });
     Route::get('{locale}',                  function(){ return view('www.index'); });
     Route::post('{locale}/contact',         ['as'=>'contact',  'uses'=>'FrontEndController@contact']);
@@ -70,7 +70,7 @@ Route::group(['middleware' => ['langlocale.pulsar']], function() {
 Set lang variable on your routes
 
 ```
-Route::group(['middleware' => ['langlocale.pulsar']], function() {
+Route::group(['middleware' => ['pulsar.langlocale']], function() {
     Route::get('/',                   function(){ return view('www.index'); });
 
     Route::get('en',                  function(){ return view('www.index'); });
