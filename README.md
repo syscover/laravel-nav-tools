@@ -2,9 +2,9 @@
 
 ## Installation
 
-####1 - After install Laravel framework, insert on file composer.json, inside require object this value and execute composer update
+**1 - After install Laravel framework, insert on file composer.json, inside require object this value and execute composer update**
 ```
-"syscover/langlocale": "dev-master"
+"syscover/langlocale": "~1.0"
 
 ```
 execute on console:
@@ -12,28 +12,28 @@ execute on console:
 composer install
 ```
 
-####2 - Register service provider, on file config/app.php add to providers array
+**2 - Register service provider, on file config/app.php add to providers array**
 
 ```
 Syscover\Langlocale\LanglocaleServiceProvider::class,
 
 ```
 
-####3 - Register middlewares pulsar.langlocale on file app/Http/Kernel.php add to routeMiddleware array
+**3 - Register middlewares pulsar.langlocale on file app/Http/Kernel.php add to routeMiddleware array**
 
 ```
 'pulsar.langLocale' => \Syscover\Langlocale\Middleware\LangLocale::class,
 
 ```
 
-####4 - To publish package, you must type on console
+**4 - To publish package, you must type on console**
 
 ```
 php artisan vendor:publish
 
 ```
 
-####5 - Set config options on config\langlocale.php
+**5 - Set config options on config\langlocale.php**
 The best option is set options in environment file, with this example
 ```
 LANGLOCALE_URL_TYPE=lang
@@ -42,7 +42,7 @@ LANGLOCALE_COUNTRIES=us|gb|es
 LANGLOCALE_DEFAULT_COUNTRY=es
 ```
 
-####6 - on app\Http\routes.php file use this cloure to implement routes with translation
+**6 - on app\Http\routes.php file use this cloure to implement routes with translation**
 
 ```
 Route::group(['middleware' => ['pulsar.langLocale']], function() {
@@ -53,7 +53,7 @@ Route::group(['middleware' => ['pulsar.langLocale']], function() {
 
 ```
 
-####7 - Route configutation
+**7 - Route configuration**
 you have several configuration options:
 
 Write your routes with locale variable:
@@ -82,12 +82,10 @@ Route::group(['middleware' => ['pulsar.langlocale']], function() {
 
 ```
 
-####8 - Get values in views
+**8 - Get values in views**
 
 You can get lang and country values with this helpers
 ```
 user_country(); // to get country user
 user_lang(); // to get language user
 ```
-
-
