@@ -9,7 +9,7 @@
 ```
 execute on console:
 ```
-composer update
+composer install
 ```
 
 ####2 - Register service provider, on file config/app.php add to providers array
@@ -22,7 +22,7 @@ Syscover\Langlocale\LanglocaleServiceProvider::class,
 ####3 - Register middlewares pulsar.langlocale on file app/Http/Kernel.php add to routeMiddleware array
 
 ```
-'pulsar.langlocale' => \Syscover\Langlocale\Middleware\LangLocale::class,
+'pulsar.langLocale' => \Syscover\Langlocale\Middleware\LangLocale::class,
 
 ```
 
@@ -45,7 +45,7 @@ LANGLOCALE_DEFAULT_COUNTRY=es
 ####6 - on app\Http\routes.php file use this cloure to implement routes with translation
 
 ```
-Route::group(['middleware' => ['pulsar.langlocale']], function() {
+Route::group(['middleware' => ['pulsar.langLocale']], function() {
 
     // write here your routes
 
