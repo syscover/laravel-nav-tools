@@ -1,6 +1,6 @@
 {
     "name": "syscover/nav-tools",
-    "description": "Nav Tools package",
+    "description": "NavTools package",
     "keywords": ["syscover","pulsar","laravel","lang","locale","nav","tools"],
     "authors": [
         {
