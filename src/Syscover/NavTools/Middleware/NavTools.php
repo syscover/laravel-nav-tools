@@ -14,13 +14,15 @@ class NavTools
      */
     public function handle($request, Closure $next)
     {
-        if(!config('navTools.urlType')) return $next($request);
+        // if is false exit
+        if(! config('navTools.urlType'))
+            return $next($request);
 
         if($request->segment(1) != null)
         {
             if(config('navTools.urlType') == 'navTools')
             {
-                $navToolsData = explode("-", $request->segment(1));
+                $navToolsData = explode('-', $request->segment(1));
             }
             elseif(config('navTools.urlType') == 'lang' || config('navTools.urlType') == 'country')
             {
@@ -83,6 +85,7 @@ class NavTools
                     $lang = config('app.locale');
                 }
 
+                // set user lang on session
                 session(['userLang' => $lang]);
             }
 

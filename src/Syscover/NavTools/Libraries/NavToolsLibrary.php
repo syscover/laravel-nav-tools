@@ -1,16 +1,5 @@
 <?php namespace Syscover\NavTools\Libraries;
 
-/**
- * @package		Pulsar
- * @author		Jose Carlos Rodríguez Palacín
- * @copyright   Copyright (c) 2014, SYSCOVER, SL.
- * @license		
- * @link		http://www.syscover.com
- * @since		Version 1.0
- * @filesource  Librarie that instance helper functions
- */
-
-
 class NavToolsLibrary
 {
     /**
