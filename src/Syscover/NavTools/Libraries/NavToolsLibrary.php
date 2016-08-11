@@ -1,4 +1,4 @@
-<?php namespace Syscover\Langlocale\Libraries;
+<?php namespace Syscover\NavTools\Libraries;
 
 /**
  * @package		Pulsar
@@ -11,7 +11,7 @@
  */
 
 
-class Miscellaneous
+class NavToolsLibrary
 {
     /**
      *  Determine which language out of an available set the user prefers most
@@ -72,7 +72,7 @@ class Miscellaneous
     }
 
     /**
-     *  Función para obtener la IP real de un cliente
+     *  Function to obtain real IP
      *
      * @access	public
      * @return	string

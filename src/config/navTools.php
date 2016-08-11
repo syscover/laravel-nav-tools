@@ -10,20 +10,20 @@ return [
 	| the language or locale or both.
 	| If select false, the plugin will be deactivated
     |
-	| Available Settings: 'lang', 'locale', 'langlocale', false
+	| Available Settings: 'lang', 'country', 'lang-country', false
     |
-    | Route example with langlocale option:
+    | Route example with lang-country option:
     | Route::get('en-us/init', function(){ return view('www.index'); });
     |
     | Route example with lang option:
     | Route::get('en/init', function(){ return view('www.index'); });
     |
-    | Route example with locale option:
+    | Route example with country option:
     | Route::get('us/init', function(){ return view('www.index'); });
 	|
 	*/
 
-    'urlType' => env('LANGLOCALE_URL_TYPE', false),
+    'urlType' => env('NAVTOOLS_URL_TYPE', false),
 
     /*
 	|--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
 	|
 	*/
 
-    'langs' => explode('|', env('LANGLOCALE_LANGS', 'en|es')),
+    'langs' => explode('|', env('NAVTOOLS_LANGS', 'en|es')),
 
 
     /*
@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'countries' => explode('|', env('LANGLOCALE_COUNTRIES', 'us|gb|es')),
+    'countries' => explode('|', env('NAVTOOLS_COUNTRIES', 'us|gb|es')),
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'defaultCountry' => env('LANGLOCALE_DEFAULT_COUNTRY', 'es'),
+    'defaultCountry' => env('NAVTOOLS_DEFAULT_COUNTRY', 'es'),
 
     /*
     |--------------------------------------------------------------------------
@@ -79,5 +79,4 @@ return [
     */
 
     'countryLang' => ['en' => 'us', 'fr' => 'fr', 'de' => 'de', 'es' => 'es', 'ja' => 'jp', 'zn' => 'cn', 'ru' => 'ru', 'pt' => 'pt']
-
 ];

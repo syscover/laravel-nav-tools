@@ -1,9 +1,9 @@
-<?php namespace Syscover\Langlocale\Middleware;
+<?php namespace Syscover\NavTools\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\App;
 
-class LangLocale
+class NavTools
 {
     /**
      * Handle an incoming request.
@@ -18,35 +18,35 @@ class LangLocale
 
         if($request->segment(1) != null)
         {
-            if(config('navTools.urlType') == 'langlocale')
+            if(config('navTools.urlType') == 'navTools')
             {
-                $langLocaleData = explode("-", $request->segment(1));
+                $navToolsData = explode("-", $request->segment(1));
             }
-            elseif(config('navTools.urlType') == 'lang' || config('navTools.urlType') == 'locale')
+            elseif(config('navTools.urlType') == 'lang' || config('navTools.urlType') == 'country')
             {
-                $langLocaleData = $request->segment(1);
+                $navToolsData = $request->segment(1);
             }
         }
         else
         {
-            $langLocaleData = [];
+            $navToolsData = [];
         }
 
         // routine to establish country and language variables in session, with URL data language and country
-        if (config('navTools.urlType') == 'langlocale' && count($langLocaleData) == 2 && in_array($langLocaleData[0], config('navTools.langs')) && in_array($langLocaleData[1], config('navTools.countries')))
+        if (config('navTools.urlType') == 'lang-country' && count($navToolsData) == 2 && in_array($navToolsData[0], config('navTools.langs')) && in_array($navToolsData[1], config('navTools.countries')))
         {
-            session(['userLang'     => $langLocaleData[0]]);
-            session(['userCountry'  => $langLocaleData[1]]);
+            session(['userLang'     => $navToolsData[0]]);
+            session(['userCountry'  => $navToolsData[1]]);
         }
         // when only we need know user language
-        elseif(config('langlocale.urlType') == 'lang' && in_array($langLocaleData, config('langlocale.langs')))
+        elseif(config('navTools.urlType') == 'lang' && in_array($navToolsData, config('navTools.langs')))
         {
-            session(['userLang' => $langLocaleData]);
+            session(['userLang' => $navToolsData]);
         }
         // when only we need know user country
-        elseif(config('langlocale.urlType') == 'locale' && in_array($langLocaleData, config('langlocale.countries')))
+        elseif(config('navTools.urlType') == 'country' && in_array($navToolsData, config('navTools.countries')))
         {
-            session(['userCountry' => $langLocaleData]);
+            session(['userCountry' => $navToolsData]);
         }
         // routine to set variables if we have cookies, set in session variables
         elseif($request->cookie('userLang') != null && $request->cookie('userCountry') != null)
@@ -58,17 +58,17 @@ class LangLocale
         // routine to set session variables without cookies
         elseif(session('userLang') == null || session('userCountry') == null)
         {
-            if(config('langlocale.urlType') == 'langlocale' || config('langlocale.urlType') == 'lang')
+            if(config('navTools.urlType') == 'lang-country' || config('navTools.urlType') == 'lang')
             {
                 // Routine to know language
                 // get header HTTP_ACCEPT_LANGUAGE if there is this variable,
                 // the bots like google don't have this variable, in this case we have to complete language data.
                 if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
                 {
-                    $browserLang = \Syscover\Langlocale\Libraries\Miscellaneous::preferedLanguage(config('langlocale.langs'));
+                    $browserLang = \Syscover\NavTools\Libraries\NavToolsLibrary::preferedLanguage(config('navTools.langs'));
 
                     // instantiate browser language
-                    if(in_array($browserLang, config('langlocale.langs')))
+                    if(in_array($browserLang, config('navTools.langs')))
                     {
                         $lang = $browserLang;
                     }
@@ -87,13 +87,13 @@ class LangLocale
             }
 
 
-            if(config('langlocale.urlType') == 'langlocale' || config('langlocale.urlType') == 'locale')
+            if(config('navTools.urlType') == 'lang-country' || config('navTools.urlType') == 'country')
             {
                 // if is set locale, we get default country from locale
-                if(config('langlocale.urlType') == 'langlocale' || config('langlocale.urlType') == 'lang')
+                if(config('navTools.urlType') == 'lang-country' || config('navTools.urlType') == 'lang')
                 {
                     // in the case of not getting a valid country, we take the country as default language
-                    $country = config('langlocale.countryLang')[$lang];
+                    $country = config('navTools.countryLang')[$lang];
                 }
                 else
                 {
@@ -104,7 +104,7 @@ class LangLocale
             }
         }
 
-        if(config('navTools.urlType') == 'langlocale' || config('navTools.urlType') == 'lang')
+        if(config('navTools.urlType') == 'lang-country' || config('navTools.urlType') == 'lang')
         {
             // We establish the language environment
             App::setLocale(session('userLang'));

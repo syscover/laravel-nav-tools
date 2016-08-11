@@ -1,8 +1,8 @@
-<?php namespace Syscover\Langlocale;
+<?php namespace Syscover\NavTools;
 
 use Illuminate\Support\ServiceProvider;
 
-class LanglocaleServiceProvider extends ServiceProvider
+class NavToolsServiceProvider extends ServiceProvider
 {
 	/**
 	 * Bootstrap the application services.
@@ -16,7 +16,7 @@ class LanglocaleServiceProvider extends ServiceProvider
 
         // register config files
         $this->publishes([
-            __DIR__ . '/../../config/langlocale.php' => config_path('langlocale.php')
+            __DIR__ . '/../../config/navTools.php' => config_path('navTools.php')
         ]);
 	}
 

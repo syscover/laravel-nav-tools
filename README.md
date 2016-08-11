@@ -1,4 +1,6 @@
-# Langlocale App to Laravel 5.2
+# NavTools package to Laravel 5.2
+
+[![Total Downloads](https://poser.pugx.org/syscover/nav-tools/downloads)](https://packagist.org/packages/syscover/nav-tools)
 
 ## Installation
 
@@ -33,16 +35,53 @@ php artisan vendor:publish
 
 ```
 
-**5 - Set config options on config\langlocale.php**
-The best option is set options in environment file, with this example
+## General configuration environment values
+
+### Set NAVTOOLS_URL_TYPE options on environment file .env
+Set url type for you web, you have three types, lang, country or lang-country, for urls type lang:
 ```
 NAVTOOLS_URL_TYPE=lang
-NAVTOOLS_LANGS=en|es
+```
+you can work with this urls
+```
+hrrp://mydomain.com/en/any-page
+```
+
+for urls type country
+```
+NAVTOOLS_URL_TYPE=country
+```
+you can work with this urls
+```
+hrrp://mydomain.com/us/any-page
+```
+
+for urls type lang-country
+```
+NAVTOOLS_URL_TYPE=lang-country
+```
+you can work with this urls
+```
+hrrp://mydomain.com/en-us/any-page
+```
+
+
+### Set NAVTOOLS_LANGS options on environment file .env
+Set countries available in your web
+```
 NAVTOOLS_COUNTRIES=us|gb|es
+```
+
+
+### Set NAVTOOLS_DEFAULT_COUNTRY options on environment file .env
+Set default country for your web
+```
 NAVTOOLS_DEFAULT_COUNTRY=es
 ```
 
-**6 - on app\Http\routes.php file use this cloure to implement routes with translation**
+
+### Routing with NavTools
+On app\Http\routes.php file use this cloure to implement routes with translation
 
 ```
 Route::group(['middleware' => ['pulsar.navTools']], function() {
@@ -53,7 +92,7 @@ Route::group(['middleware' => ['pulsar.navTools']], function() {
 
 ```
 
-**7 - Route configuration**
+#### Route configuration
 you have several configuration options:
 
 Write your routes with locale variable:
@@ -82,7 +121,7 @@ Route::group(['middleware' => ['pulsar.navTools']], function() {
 
 ```
 
-**8 - Get values in views**
+### Get values in views
 
 You can get lang and country values with this helpers
 ```
