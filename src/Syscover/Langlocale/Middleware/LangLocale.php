@@ -14,15 +14,15 @@ class LangLocale
      */
     public function handle($request, Closure $next)
     {
-        if(!config('langlocale.urlType')) return $next($request);
+        if(!config('navTools.urlType')) return $next($request);
 
         if($request->segment(1) != null)
         {
-            if(config('langlocale.urlType') == 'langlocale')
+            if(config('navTools.urlType') == 'langlocale')
             {
                 $langLocaleData = explode("-", $request->segment(1));
             }
-            elseif(config('langlocale.urlType') == 'lang' || onfig('langlocale.urlType') == 'locale')
+            elseif(config('navTools.urlType') == 'lang' || config('navTools.urlType') == 'locale')
             {
                 $langLocaleData = $request->segment(1);
             }
@@ -33,7 +33,7 @@ class LangLocale
         }
 
         // routine to establish country and language variables in session, with URL data language and country
-        if (config('langlocale.urlType') == 'langlocale' && count($langLocaleData) == 2 && in_array($langLocaleData[0], config('langlocale.langs')) && in_array($langLocaleData[1], config('langlocale.countries')))
+        if (config('navTools.urlType') == 'langlocale' && count($langLocaleData) == 2 && in_array($langLocaleData[0], config('navTools.langs')) && in_array($langLocaleData[1], config('navTools.countries')))
         {
             session(['userLang'     => $langLocaleData[0]]);
             session(['userCountry'  => $langLocaleData[1]]);
@@ -97,16 +97,16 @@ class LangLocale
                 }
                 else
                 {
-                    $country = config('langlocale.defaultCountry');
+                    $country = config('navTools.defaultCountry');
                 }
 
                 session(['userCountry' => $country]);
             }
         }
 
-        if(config('langlocale.urlType') == 'langlocale' || config('langlocale.urlType') == 'lang')
+        if(config('navTools.urlType') == 'langlocale' || config('navTools.urlType') == 'lang')
         {
-            // we establish the language environment
+            // We establish the language environment
             App::setLocale(session('userLang'));
         }
 

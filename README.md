@@ -2,9 +2,9 @@
 
 ## Installation
 
-**1 - After install Laravel framework, insert on file composer.json, inside require object this value and execute composer update**
+**1 - After install Laravel framework, insert on file composer.json, inside require object this value and execute composer install**
 ```
-"syscover/langlocale": "~1.0"
+"syscover/nav-tools": "~1.0"
 
 ```
 execute on console:
@@ -15,14 +15,14 @@ composer install
 **2 - Register service provider, on file config/app.php add to providers array**
 
 ```
-Syscover\Langlocale\LanglocaleServiceProvider::class,
+Syscover\NavTools\NavToolsServiceProvider::class,
 
 ```
 
-**3 - Register middlewares pulsar.langlocale on file app/Http/Kernel.php add to routeMiddleware array**
+**3 - Register middlewares pulsar.navTools on file app/Http/Kernel.php add to routeMiddleware array**
 
 ```
-'pulsar.langLocale' => \Syscover\Langlocale\Middleware\LangLocale::class,
+'pulsar.navTools' => \Syscover\NavTools\Middleware\NavTools::class,
 
 ```
 
@@ -36,16 +36,16 @@ php artisan vendor:publish
 **5 - Set config options on config\langlocale.php**
 The best option is set options in environment file, with this example
 ```
-LANGLOCALE_URL_TYPE=lang
-LANGLOCALE_LANGS=en|es
-LANGLOCALE_COUNTRIES=us|gb|es
-LANGLOCALE_DEFAULT_COUNTRY=es
+NAVTOOLS_URL_TYPE=lang
+NAVTOOLS_LANGS=en|es
+NAVTOOLS_COUNTRIES=us|gb|es
+NAVTOOLS_DEFAULT_COUNTRY=es
 ```
 
 **6 - on app\Http\routes.php file use this cloure to implement routes with translation**
 
 ```
-Route::group(['middleware' => ['pulsar.langLocale']], function() {
+Route::group(['middleware' => ['pulsar.navTools']], function() {
 
     // write here your routes
 
@@ -59,7 +59,7 @@ you have several configuration options:
 Write your routes with locale variable:
 
 ```
-Route::group(['middleware' => ['pulsar.langlocale']], function() {
+Route::group(['middleware' => ['pulsar.navTools']], function() {
     Route::get('/',                         function(){ return view('www.index'); });
     Route::get('{locale}',                  function(){ return view('www.index'); });
     Route::post('{locale}/contact',         ['as'=>'contact',  'uses'=>'FrontEndController@contact']);
@@ -70,14 +70,14 @@ Route::group(['middleware' => ['pulsar.langlocale']], function() {
 Set lang variable on your routes
 
 ```
-Route::group(['middleware' => ['pulsar.langlocale']], function() {
+Route::group(['middleware' => ['pulsar.navTools']], function() {
     Route::get('/',                   function(){ return view('www.index'); });
 
     Route::get('en',                  function(){ return view('www.index'); });
     Route::get('es',                  function(){ return view('www.index'); });
 
-    Route::post('en/contact',         ['as'=>'contact',          'uses'=>'FrontEndController@contact']);
-    Route::post('es/contacto',        ['as'=>'contact',          'uses'=>'FrontEndController@contact']);
+    Route::post('en/contact',         ['as' => 'contact-en',          'uses'=>'FrontEndController@contact']);
+    Route::post('es/contacto',        ['as' => 'contact-es',          'uses'=>'FrontEndController@contact']);
 });
 
 ```

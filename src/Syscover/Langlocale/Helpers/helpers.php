@@ -20,7 +20,7 @@ if (! function_exists('user_country')) {
      */
     function user_country()
     {
-        return session('userCountry') === null? config('langlocale.defaultCountry') : session('userCountry');
+        return session('userCountry') === null? config('navTools.defaultCountry') : session('userCountry');
     }
 }
 

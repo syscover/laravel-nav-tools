@@ -1,9 +1,7 @@
 {
-    "name": "syscover/langlocale",
-    "version": "5.2",
-    "description": "Lang Locale package",
-    "keywords": ["syscover","pulsar","laravel","lang","locale"],
-    "license": "MIT",
+    "name": "syscover/nav-tools",
+    "description": "Nav Tools package",
+    "keywords": ["syscover","pulsar","laravel","lang","locale","nav","tools"],
     "authors": [
         {
             "name": "SYSCOVER SL",
@@ -15,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Syscover\\Langlocale\\": "src/Syscover/Langlocale"
+            "Syscover\\NavTools\\": "src/Syscover/NavTools"
         }
     },
     "minimum-stability": "dev"

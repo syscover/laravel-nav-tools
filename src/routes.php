@@ -8,7 +8,7 @@
 |
 */
 
-Route::group(['middleware' => ['langlocale.pulsar']], function() {
+Route::group(['middleware' => ['pulsar.navTools']], function() {
 
     // write here your routes
 
