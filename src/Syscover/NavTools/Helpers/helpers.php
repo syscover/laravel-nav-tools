@@ -37,7 +37,7 @@ if (! function_exists('get_lang_route_name')) {
         if(Route::has($originRoute . $lang))
             return $originRoute . $lang;
         else
-            // comprobamos si hay una ruta con el código de idioma
+            // check if exist any route with language code
             if(Route::has($routeName . '-' . $lang))
                 return $routeName . '-' . $lang;
             else
