@@ -26,6 +26,8 @@ if (! function_exists('user_country')) {
 
 if (! function_exists('get_lang_route_name')) {
     /**
+     * Return route name, given current url, depending of language
+     *
      * @param   string  $lang
      * @return  string
      */
@@ -35,13 +37,47 @@ if (! function_exists('get_lang_route_name')) {
         $originRoute    = substr($routeName, 0, strlen($routeName) - 2);
 
         if(Route::has($originRoute . $lang))
+        {
             return $originRoute . $lang;
+        }
         else
+        {
             // check if exist any route with language code
             if(Route::has($routeName . '-' . $lang))
                 return $routeName . '-' . $lang;
             else
                 return $routeName;
+        }
+    }
+}
+
+if (! function_exists('get_lang_route')) {
+    /**
+     * Return route name, given current url, depending of language
+     *
+     * @param   string  $lang
+     * @return  string
+     */
+    function get_lang_route($lang)
+    {
+        // get parameters from url route
+        $parameters     = Request::route()->parameters();
+
+        $routeName      = Request::route()->getName();
+        $originRoute    = substr($routeName, 0, strlen($routeName) - 2);
+
+        if(Route::has($originRoute . $lang))
+        {
+            return route($originRoute . $lang, $parameters);
+        }
+        else
+        {
+            // check if exist any route with language code
+            if(Route::has($routeName . '-' . $lang))
+                return route($routeName . '-' . $lang, $parameters);
+            else
+                return route($routeName, $parameters);
+        }
     }
 }
 
