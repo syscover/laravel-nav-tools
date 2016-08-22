@@ -7,33 +7,27 @@
 **1 - After install Laravel framework, insert on file composer.json, inside require object this value and execute composer install**
 ```
 "syscover/nav-tools": "~1.0"
-
 ```
 execute on console:
 ```
-composer install
+composer update
 ```
 
 **2 - Register service provider, on file config/app.php add to providers array**
-
 ```
 Syscover\NavTools\NavToolsServiceProvider::class,
-
 ```
 
-**3 - Register middlewares pulsar.navTools on file app/Http/Kernel.php add to routeMiddleware array**
-
-```
-'pulsar.navTools' => \Syscover\NavTools\Middleware\NavTools::class,
-
-```
-
-**4 - To publish package, you must type on console**
-
+**3 - To publish package, you must type on console**
 ```
 php artisan vendor:publish
-
 ```
+
+**4 - Register middlewares pulsar.navTools on file app/Http/Kernel.php add to routeMiddleware array**
+```
+'pulsar.navTools' => \Syscover\NavTools\Middleware\NavTools::class,
+```
+
 
 ## General configuration environment values
 
