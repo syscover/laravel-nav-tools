@@ -110,7 +110,7 @@ class NavTools
         if(config('navTools.urlType') == 'lang-country' || config('navTools.urlType') == 'lang')
         {
             // We establish the language environment
-            App::setLocale(session('userLang'));
+            App::setLocale(user_lang());
         }
 
         return $next($request);
