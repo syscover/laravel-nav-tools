@@ -1,4 +1,4 @@
-# NavTools package to Laravel 5.2
+# NavTools package to Laravel 5.3
 
 [![Total Downloads](https://poser.pugx.org/syscover/nav-tools/downloads)](https://packagist.org/packages/syscover/nav-tools)
 
@@ -6,7 +6,7 @@
 
 **1 - After install Laravel framework, insert on file composer.json, inside require object this value and execute composer install**
 ```
-"syscover/nav-tools": "~1.0"
+"syscover/nav-tools": "~2.0"
 ```
 execute on console:
 ```
