@@ -8,7 +8,8 @@ if (! function_exists('user_lang')) {
      */
     function user_lang()
     {
-        return session('userLang') === null? config('app.locale') : session('userLang');
+        return session('userLang') === null?
+            config('app.locale') : session('userLang');
     }
 }
 
@@ -20,7 +21,8 @@ if (! function_exists('user_country')) {
      */
     function user_country()
     {
-        return session('userCountry') === null? config('navTools.defaultCountry') : session('userCountry');
+        return session('userCountry') === null?
+            config('navTools.defaultCountry') : session('userCountry');
     }
 }
 
