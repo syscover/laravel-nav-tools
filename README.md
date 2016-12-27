@@ -107,7 +107,7 @@ Route::group(['middleware' => ['pulsar.navTools']], function() {
 
 ```
 
-Set lang variable on your routes
+Or set lang variable on your routes
 
 ```
 Route::group(['middleware' => ['pulsar.navTools']], function() {
@@ -118,6 +118,34 @@ Route::group(['middleware' => ['pulsar.navTools']], function() {
 
     Route::post('en/contact',         ['as' => 'contact-en',          'uses'=>'FrontEndController@contact']);
     Route::post('es/contacto',        ['as' => 'contact-es',          'uses'=>'FrontEndController@contact']);
+});
+
+```
+
+Or use helpers to get country value
+
+```
+Route::group(['middleware' => ['pulsar.navTools']], function() {
+    Route::get('/',                   function(){ return view('www.index'); });
+
+    Route::get('/en-' . user_country(),                  function(){ return view('www.index'); });
+    Route::get('/es-' . user_country(),                  function(){ return view('www.index'); });
+
+    Route::post('en-' . user_country(). '/contact',         ['as' => 'contact-en',          'uses'=>'FrontEndController@contact']);
+    Route::post('es-' . user_country(). '/contacto',        ['as' => 'contact-es',          'uses'=>'FrontEndController@contact']);
+});
+
+```
+
+Or use helpers to get language value
+
+```
+Route::group(['middleware' => ['pulsar.navTools']], function() {
+    Route::get('/',                   function(){ return view('www.index'); });
+
+    Route::get(user_lang() . '-' . user_country(),                  function(){ return view('www.index'); });
+
+    Route::post(user_lang() . '-' . user_country(). '/contact',         ['as' => 'contact-en',          'uses'=>'FrontEndController@contact']);
 });
 
 ```
