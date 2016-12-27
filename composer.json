@@ -14,7 +14,10 @@
     "autoload": {
         "psr-4": {
             "Syscover\\NavTools\\": "src/Syscover/NavTools"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "minimum-stability": "dev"
 }

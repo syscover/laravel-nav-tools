@@ -20,7 +20,7 @@ class NavTools
 
         if($request->segment(1) != null)
         {
-            if(config('navTools.urlType') == 'navTools')
+            if(config('navTools.urlType') == 'lang-country')
             {
                 $navToolsData = explode('-', $request->segment(1));
             }
@@ -35,7 +35,11 @@ class NavTools
         }
 
         // routine to establish country and language variables in session, with URL data language and country
-        if (config('navTools.urlType') == 'lang-country' && count($navToolsData) == 2 && in_array($navToolsData[0], config('navTools.langs')) && in_array($navToolsData[1], config('navTools.countries')))
+        if (
+            config('navTools.urlType') == 'lang-country' &&
+            count($navToolsData) == 2 &&
+            in_array($navToolsData[0], config('navTools.langs')) &&
+            in_array($navToolsData[1], config('navTools.countries')))
         {
             session(['userLang'     => $navToolsData[0]]);
             session(['userCountry'  => $navToolsData[1]]);
