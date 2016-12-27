@@ -11,9 +11,6 @@ class NavToolsServiceProvider extends ServiceProvider
 	 */
 	public function boot()
 	{
-		// include helpers file
-		include __DIR__ . '/Helpers/helpers.php';
-
         // register config files
         $this->publishes([
             __DIR__ . '/../../config/navTools.php' => config_path('navTools.php')
