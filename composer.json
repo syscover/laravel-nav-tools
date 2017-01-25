@@ -1,7 +1,8 @@
 {
     "name": "syscover/laravel-nav-tools",
     "description": "NavTools package",
-    "keywords": ["syscover","pulsar","laravel","lang","locale","nav","tools"],
+    "keywords": ["laravel","language","locale","set language","set country"],
+    "license": "MIT",
     "authors": [
         {
             "name": "SYSCOVER SL",
