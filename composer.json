@@ -1,5 +1,5 @@
 {
-    "name": "syscover/nav-tools",
+    "name": "syscover/laravel-nav-tools",
     "description": "NavTools package",
     "keywords": ["syscover","pulsar","laravel","lang","locale","nav","tools"],
     "authors": [

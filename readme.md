@@ -1,16 +1,12 @@
 # NavTools package to Laravel 5.3
 
-[![Total Downloads](https://poser.pugx.org/syscover/nav-tools/downloads)](https://packagist.org/packages/syscover/nav-tools)
+<a href="https://packagist.org/packages/syscover/laravel-nav-tools"><img src="https://poser.pugx.org/syscover/laravel-nav-tools/downloads" alt="Total Downloads"></a>
 
 ## Installation
 
-**1 - After install Laravel framework, insert on file composer.json, inside require object this value and execute composer install**
+**1 - From the command line run**
 ```
-"syscover/nav-tools": "~2.0"
-```
-execute on console:
-```
-composer update
+composer require syscover/laravel-nav-tools
 ```
 
 **2 - Register service provider, on file config/app.php add to providers array**
@@ -20,7 +16,7 @@ Syscover\NavTools\NavToolsServiceProvider::class,
 
 **3 - To publish package, you must type on console**
 ```
-php artisan vendor:publish
+php artisan vendor:publish --provider="Syscover\NavTools\NavToolsServiceProvider"
 ```
 
 **4 - Register middlewares pulsar.navTools on file app/Http/Kernel.php add to routeMiddleware array**

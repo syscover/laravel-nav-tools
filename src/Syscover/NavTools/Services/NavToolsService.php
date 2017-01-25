@@ -1,6 +1,6 @@
-<?php namespace Syscover\NavTools\Libraries;
+<?php namespace Syscover\NavTools\Services;
 
-class NavToolsLibrary
+class NavToolsService
 {
     /**
      *  Determine which language out of an available set the user prefers most
@@ -12,7 +12,7 @@ class NavToolsLibrary
      * @param       array|string $http_accept_language      HTTP_ACCEPT_LANGUAGE string (read from $_SERVER['HTTP_ACCEPT_LANGUAGE'] if left out)
      * @return      string
      */
-    public static function preferedLanguage ($available_languages, $http_accept_language = "auto")
+    public static function preferentialLanguage ($available_languages, $http_accept_language = "auto")
     {
         // if $http_accept_language was left out, read it from the HTTP-Header
         if ($http_accept_language == "auto") $http_accept_language = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : '';
@@ -38,7 +38,7 @@ class NavToolsLibrary
             if (!empty($arr[3]))
             {
                 $langrange = strtolower ($arr[3]);
-                $language = $langprefix . "-" . $langrange;
+                $language = $langprefix . '-' . $langrange;
             }
             else $language = $langprefix;
             $qvalue = 1.0;
@@ -58,30 +58,5 @@ class NavToolsLibrary
             }
         }
         return $bestlang;
-    }
-
-    /**
-     *  Function to obtain real IP
-     *
-     * @access	public
-     * @return	string
-     */
-    public static function getRealIp()
-    {
-        if (!empty($_SERVER['HTTP_CLIENT_IP']))
-        {
-            //check ip from share internet
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        }
-        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
-        {
-            //to check ip is pass from proxy
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        }
-        else
-        {
-            $ip = $_SERVER['REMOTE_ADDR'];
-        }
-        return $ip;
     }
 }

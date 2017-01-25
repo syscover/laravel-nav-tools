@@ -78,5 +78,14 @@ return [
     |
     */
 
-    'countryLang' => ['en' => 'us', 'fr' => 'fr', 'de' => 'de', 'es' => 'es', 'ja' => 'jp', 'zn' => 'cn', 'ru' => 'ru', 'pt' => 'pt']
+    'countryLang' => [
+        'de' => 'de',
+        'en' => 'us',
+        'es' => 'es',
+        'fr' => 'fr',
+        'ja' => 'jp',
+        'pt' => 'pt',
+        'ru' => 'ru',
+        'zn' => 'cn',
+    ]
 ];
