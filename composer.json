@@ -3,6 +3,7 @@
     "description": "NavTools package",
     "keywords": ["laravel","language","locale","set language","set country"],
     "license": "MIT",
+    "type": "project",
     "authors": [
         {
             "name": "SYSCOVER SL",
