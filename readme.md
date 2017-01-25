@@ -1,6 +1,8 @@
-# NavTools package to Laravel 5.3
+# NavTools package to Laravel 5.4
 
 <a href="https://packagist.org/packages/syscover/laravel-nav-tools"><img src="https://poser.pugx.org/syscover/laravel-nav-tools/downloads" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/syscover/laravel-nav-tools"><img src="https://poser.pugx.org/syscover/laravel-nav-tools/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/syscover/laravel-nav-tools"><img src="https://poser.pugx.org/syscover/laravel-nav-tools/license.svg" alt="License"></a>
 
 ## Installation
 
@@ -78,7 +80,7 @@ NAVTOOLS_DEFAULT_COUNTRY=es
 
 
 ### Routing with NavTools
-On app\Http\routes.php file use this cloure to implement routes with translation
+On app\Http\routes.php file use this closure to implement routes with translation
 
 ```
 Route::group(['middleware' => ['pulsar.navTools']], function() {
@@ -90,15 +92,16 @@ Route::group(['middleware' => ['pulsar.navTools']], function() {
 ```
 
 #### Route configuration
-you have several configuration options:
 
-Write your routes with locale variable:
+You have several url configuration options depends on the chosen NAVTOOLS_URL_TYPE parameter:
+
+Write your routes with lang variable
 
 ```
 Route::group(['middleware' => ['pulsar.navTools']], function() {
     Route::get('/',                         function(){ return view('www.index'); });
-    Route::get('{locale}',                  function(){ return view('www.index'); });
-    Route::post('{locale}/contact',         ['as'=>'contact',  'uses'=>'FrontEndController@contact']);
+    Route::get('{lang}',                  function(){ return view('www.index'); });
+    Route::post('{lang}/contact',         ['as'=>'contact',  'uses'=>'FrontEndController@contact']);
 });
 
 ```
@@ -118,38 +121,42 @@ Route::group(['middleware' => ['pulsar.navTools']], function() {
 
 ```
 
-Or use helpers to get country value
+Or set constant lang but country variable
 
 ```
 Route::group(['middleware' => ['pulsar.navTools']], function() {
     Route::get('/',                   function(){ return view('www.index'); });
 
-    Route::get('/en-' . user_country(),                  function(){ return view('www.index'); });
-    Route::get('/es-' . user_country(),                  function(){ return view('www.index'); });
+    Route::get('/en-{country}',                  function(){ return view('www.index'); });
+    Route::get('/es-{country}',                  function(){ return view('www.index'); });
 
-    Route::post('en-' . user_country(). '/contact',         ['as' => 'contact-en',          'uses'=>'FrontEndController@contact']);
-    Route::post('es-' . user_country(). '/contacto',        ['as' => 'contact-es',          'uses'=>'FrontEndController@contact']);
+    Route::post('en-{country}'/contact',         ['as' => 'contact-en',          'uses'=>'FrontEndController@contact']);
+    Route::post('es-{country}'/contacto',        ['as' => 'contact-es',          'uses'=>'FrontEndController@contact']);
 });
 
 ```
 
-Or use helpers to get language value
+Or use lang and country variables to get language value
 
 ```
 Route::group(['middleware' => ['pulsar.navTools']], function() {
     Route::get('/',                   function(){ return view('www.index'); });
 
-    Route::get(user_lang() . '-' . user_country(),                  function(){ return view('www.index'); });
+    Route::get('/{lang}-{country}',                  function(){ return view('www.index'); });
 
-    Route::post(user_lang() . '-' . user_country(). '/contact',         ['as' => 'contact-en',          'uses'=>'FrontEndController@contact']);
+    Route::post('/{lang}-{country}/contact',         ['as' => 'contact-en',          'uses'=>'FrontEndController@contact']);
 });
 
 ```
 
-### Get values in views
+### Get values in your application
 
 You can get lang and country values with this helpers
 ```
 user_country(); // to get country user
 user_lang(); // to get language user
 ```
+
+## License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
