@@ -71,9 +71,22 @@ class NavTools
         }
 
         //********************************************************
+        // Instance lang or country variable by cookies
+        //********************************************************
+        if($lang === null && (config('navTools.urlType') === 'lang-country' || config('navTools.urlType') ==='lang') && $request->cookie('userLang') !== null)
+        {
+            $lang = $request->cookie('userLang');
+        }
+
+        if($country === null && (config('navTools.urlType') === 'lang-country' || config('navTools.urlType') ==='country') && $request->cookie('userCountry') !== null)
+        {
+            $country = $request->cookie('userCountry');
+        }
+
+        //********************************************************
         // Instance lang or country variable by browser language
         //********************************************************
-        if($lang == null)
+        if($lang === null && (config('navTools.urlType') === 'lang-country' || config('navTools.urlType') === 'lang'))
         {
             // Routine to know language and get header HTTP_ACCEPT_LANGUAGE if there is this variable.
             // the bots like google don't have this variable, in this case we have to complete language data.
@@ -87,7 +100,7 @@ class NavTools
             }
         }
 
-        if($country == null && $lang !== null)
+        if($country === null && $lang !== null)
         {
             // if is set locale, we get default country from locale
             if(isset(config('navTools.countryLang')[$lang]))
@@ -98,7 +111,7 @@ class NavTools
         }
 
         // Check exceptions
-        if($lang != null && ! in_array($lang, config('navTools.langs')))
+        if($lang !== null && ! in_array($lang, config('navTools.langs')))
         {
             if(env('APP_DEBUG'))
                 throw new ParameterFormatException('Variable lang is not valid value, check NAVTOOLS_LANGS in your environment, will be a 404 error in production');
@@ -106,7 +119,7 @@ class NavTools
                 abort(404);
         }
 
-        if($country != null && ! in_array($country, config('navTools.countries')))
+        if($country !== null && ! in_array($country, config('navTools.countries')))
         {
             if(env('APP_DEBUG'))
                 throw new ParameterFormatException('Variable country is not valid value, check NAVTOOLS_COUNTRIES in your environment, will be a 404 error in production');
@@ -117,36 +130,26 @@ class NavTools
         //****************
         // Set sessions
         //****************
-        if (config('navTools.urlType') == 'lang-country')
+        if (config('navTools.urlType') === 'lang-country')
         {
             session(['userLang'     => $lang]);
             session(['userCountry'  => $country]);
         }
-        elseif(config('navTools.urlType') == 'lang')
+        elseif(config('navTools.urlType') === 'lang')
         {
             session(['userLang' => $lang]);
         }
-        elseif(config('navTools.urlType') == 'country')
+        elseif(config('navTools.urlType') === 'country')
         {
             session(['userCountry' => $country]);
         }
-        // routine to set variables if we have cookies, set in session variables
-        elseif($request->cookie('userLang') != null )
-        {
-            session('userLang', $request->cookie('userLang'));
-        }
-        elseif($request->cookie('userCountry') != null)
-        {
-            session('userCountry', $request->cookie('userCountry'));
-        }
-
 
         //**********************************
         // Set application language
         //**********************************
         if(
-            config('navTools.urlType') == 'lang-country' ||
-            config('navTools.urlType') == 'lang'
+            config('navTools.urlType') === 'lang-country' ||
+            config('navTools.urlType') === 'lang'
         )
         {
             App::setLocale(user_lang());
