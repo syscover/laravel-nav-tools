@@ -136,7 +136,7 @@ Route::group(['middleware' => ['pulsar.navTools']], function() {
 
 ```
 
-Or use lang and country variables to get language value
+Or use lang and country variables to get language value.
 
 ```
 Route::group(['middleware' => ['pulsar.navTools']], function() {
@@ -151,21 +151,23 @@ Route::group(['middleware' => ['pulsar.navTools']], function() {
 
 ### Get values in your application
 
-You can get lang and country values with this helpers
+You can get lang and country values with this helpers.
 ```
 user_country(); // to get country user
 user_lang(); // to get language user
 ```
 
-For set routes you need add lang or country parameters depend of NAVTOOLS_URL_TYPE
+To set routes you need to add lang or country parameters depending on NAVTOOLS_URL_TYPE.
 ```
 route('routeName', ['lang' => 'en', 'country' => 'us']);
 ```
 
-You can use a custom helper nt_route, this helper insert automatically variable lang and country, unless you specify these variables
+You can use a custom helper **nt_route()**, this helper inserts automatically variables lang and country, unless you specify these variables.
 ```
 nt_route('routeName');
 ```
+
+You can use **redirect()** helper without any trouble, we have extended Laravel core so that **redirect()->route()** does the same as **nt_route()**.
 
 ## License
 
