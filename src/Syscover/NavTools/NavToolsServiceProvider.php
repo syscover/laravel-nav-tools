@@ -1,6 +1,7 @@
 <?php namespace Syscover\NavTools;
 
 use Illuminate\Support\ServiceProvider;
+use Syscover\NavTools\Lib\Redirector;
 
 class NavToolsServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,10 @@ class NavToolsServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-        //
+        // Extend core class Illuminate\Routing\Redirector
+	    $this->app->bind('redirect', function($app)
+        {
+            return new Redirector($app->make(\Illuminate\Routing\UrlGenerator::class));
+        });
 	}
 }
