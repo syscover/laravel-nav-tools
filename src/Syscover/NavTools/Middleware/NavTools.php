@@ -78,7 +78,7 @@ class NavTools
             $lang = $request->cookie('userLang');
         }
 
-        if($country === null && (config('navTools.urlType') === 'lang-country' || config('navTools.urlType') ==='country') && $request->cookie('userCountry') !== null)
+        if($country === null && (config('navTools.urlType') === 'lang-country' || config('navTools.urlType') ==='country') && $request->cookie('userCountry') != null)
         {
             $country = $request->cookie('userCountry');
         }
@@ -119,7 +119,13 @@ class NavTools
                 abort(404);
         }
 
-        if($country !== null && ! in_array($country, config('navTools.countries')))
+        // get resource from countries
+        if(config('navTools.resource') === 'env')
+            $countries = collect(config('navTools.countries'));
+        else
+            $countries = collect(config(config('navTools.resource')))->flatten();
+
+        if($country !== null && ! $countries->contains(strtoupper($country)))
         {
             if(env('APP_DEBUG'))
                 throw new ParameterFormatException('Variable country is not valid value, check NAVTOOLS_COUNTRIES in your environment, will be a 404 error in production');

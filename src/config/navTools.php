@@ -41,6 +41,19 @@ return [
 
     'langs' => explode('|', env('NAVTOOLS_LANGS', 'en|es')),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Resource
+    |--------------------------------------------------------------------------
+    |
+    | Set if countries resource come from NAVTOOLS_COUNTRIES variable environment
+    | or from other config array
+    |
+    | Example Settings: 'env'
+    | Example Settings: 'web.countries'
+    |
+    */
+    'resource' => env('NAVTOOLS_COUNTRIES_RESOURCE', 'env'),
 
     /*
     |--------------------------------------------------------------------------
