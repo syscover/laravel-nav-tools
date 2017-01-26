@@ -1,6 +1,37 @@
 <?php
 
-if (! function_exists('user_lang')) {
+if (function_exists('route') && ! function_exists('nt_route'))
+{
+    /**
+     * Generate the URL to a named route.
+     *
+     * @param  string  $name
+     * @param  array   $parameters
+     * @param  bool    $absolute
+     * @return string
+     */
+    function nt_route($name, $parameters = [], $absolute = true)
+    {
+        $routeCollection    = \Illuminate\Support\Facades\Route::getRoutes();
+        $route              = $routeCollection->getByName($name);
+
+        if($route !== null)
+        {
+            $urlParameters = $routeCollection->getByName($name)->parameterNames();
+
+            if(! isset($parameters['lang']) && in_array('lang', $urlParameters))
+                $parameters['lang'] = user_lang();
+
+            if(! isset($parameters['country']) && in_array('country', $urlParameters))
+                $parameters['country'] = user_country();
+        }
+
+        return route($name, $parameters, $absolute);
+    }
+}
+
+if (! function_exists('user_lang'))
+{
     /**
      * Get user lang from session.
      *
@@ -13,7 +44,8 @@ if (! function_exists('user_lang')) {
     }
 }
 
-if (! function_exists('user_country')) {
+if (! function_exists('user_country'))
+{
     /**
      * Get user country from session.
      *
@@ -26,7 +58,8 @@ if (! function_exists('user_country')) {
     }
 }
 
-if (! function_exists('get_lang_route_name')) {
+if (! function_exists('get_lang_route_name'))
+{
     /**
      * Return route name, given current url, depending of language
      *
@@ -35,17 +68,18 @@ if (! function_exists('get_lang_route_name')) {
      */
     function get_lang_route_name($lang)
     {
-        $routeName      = Request::route()->getName();
+        $route          = \Illuminate\Support\Facades\Route::getCurrentRoute();
+        $routeName      = $route->getName();
         $originRoute    = substr($routeName, 0, strlen($routeName) - 2);
 
-        if(Route::has($originRoute . $lang))
+        if(\Illuminate\Support\Facades\Route::has($originRoute . $lang))
         {
             return $originRoute . $lang;
         }
         else
         {
-            // check if exist any route with language code
-            if(Route::has($routeName . '-' . $lang))
+            /// If exist route without lang sum new lang
+            if(\Illuminate\Support\Facades\Route::has($routeName . '-' . $lang))
                 return $routeName . '-' . $lang;
             else
                 return $routeName;
@@ -53,7 +87,8 @@ if (! function_exists('get_lang_route_name')) {
     }
 }
 
-if (! function_exists('get_lang_route')) {
+if (! function_exists('get_lang_route'))
+{
     /**
      * Return route name, given current url, depending of language
      *
@@ -62,28 +97,29 @@ if (! function_exists('get_lang_route')) {
      */
     function get_lang_route($lang)
     {
-        // get parameters from url route
-        $parameters     = Request::route()->parameters();
+        $route              = \Illuminate\Support\Facades\Route::getCurrentRoute();
+        $parameters         = $route->parameters();
+        $routeName          = $route->getName();
+        $routeWithoutLang   = substr($routeName, 0, strlen($routeName) - 2);
 
-        $routeName      = Request::route()->getName();
-        $originRoute    = substr($routeName, 0, strlen($routeName) - 2);
-
-        if(Route::has($originRoute . $lang))
+        // If exist route without lang sum new lang
+        if(\Illuminate\Support\Facades\Route::has($routeWithoutLang . $lang))
         {
-            return route($originRoute . $lang, $parameters);
+            return nt_route($routeWithoutLang . $lang, $parameters);
         }
         else
         {
-            // check if exist any route with language code
-            if(Route::has($routeName . '-' . $lang))
-                return route($routeName . '-' . $lang, $parameters);
+            // Maybe can to be a route without lang that has other route with lang
+            if(\Illuminate\Support\Facades\Route::has($routeName . '-' . $lang))
+                return nt_route($routeName . '-' . $lang, $parameters);
             else
-                return route($routeName, $parameters);
+                return nt_route($routeName, $parameters);
         }
     }
 }
 
-if (! function_exists('active_menu')) {
+if (! function_exists('active_menu'))
+{
     /**
      * Get user country from session.
      * @param   string      $routeName          name of route to check
