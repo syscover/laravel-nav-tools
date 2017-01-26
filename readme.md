@@ -157,6 +157,16 @@ user_country(); // to get country user
 user_lang(); // to get language user
 ```
 
+For set routes you need add lang or country parameters depend of NAVTOOLS_URL_TYPE
+```
+route('routeName', ['lang' => 'en', 'country' => 'us']);
+```
+
+You can use a custom helper nt_route, this helper insert automatically variable lang and country, unless you specify these variables
+```
+nt_route('routeName');
+```
+
 ## License
 
 The NavTools is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
