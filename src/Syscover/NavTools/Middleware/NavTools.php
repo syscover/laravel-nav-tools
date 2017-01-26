@@ -99,11 +99,20 @@ class NavTools
 
         // Check exceptions
         if($lang != null && ! in_array($lang, config('navTools.langs')))
-            throw new ParameterFormatException('Variable lang is not valid value, check NAVTOOLS_LANGS in your environment');
+        {
+            if(env('APP_DEBUG'))
+                throw new ParameterFormatException('Variable lang is not valid value, check NAVTOOLS_LANGS in your environment, will be a 404 error in production');
+            else
+                abort(404);
+        }
 
         if($country != null && ! in_array($country, config('navTools.countries')))
-            throw new ParameterFormatException('Variable country is not valid value, check NAVTOOLS_COUNTRIES in your environment');
-
+        {
+            if(env('APP_DEBUG'))
+                throw new ParameterFormatException('Variable country is not valid value, check NAVTOOLS_COUNTRIES in your environment, will be a 404 error in production');
+            else
+                abort(404);
+        }
 
         //****************
         // Set sessions
