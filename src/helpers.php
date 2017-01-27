@@ -30,6 +30,36 @@ if (function_exists('route') && ! function_exists('nt_route'))
     }
 }
 
+if (! function_exists('change_lang'))
+{
+    /**
+     * Change the language, to set a cookie to execute on the next response
+     *
+     * @param $lang
+     * @return void
+     */
+    function change_language($lang)
+    {
+        \Illuminate\Support\Facades\Cookie::queue(\Illuminate\Support\Facades\Cookie::forever('userLang', strtolower($lang)));
+        session(['userLang'     => $lang]);
+    }
+}
+
+if (! function_exists('change_country'))
+{
+    /**
+     * Change the language, to set a cookie to execute on the next response
+     *
+     * @param $country
+     * @return void
+     */
+    function change_country($country)
+    {
+        \Illuminate\Support\Facades\Cookie::queue(\Illuminate\Support\Facades\Cookie::forever('userCountry', strtolower($country)));
+        session(['userCountry'  => $country]);
+    }
+}
+
 if (! function_exists('user_lang'))
 {
     /**
