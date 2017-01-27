@@ -2,6 +2,7 @@
 
 use Closure;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cookie;
 use Syscover\NavTools\Exceptions\ParameterFormatException;
 
 class NavTools
@@ -86,10 +87,11 @@ class NavTools
         //********************************************************
         // Instance lang or country variable by browser language
         //********************************************************
-        if($lang === null && (config('navTools.urlType') === 'lang-country' || config('navTools.urlType') === 'lang'))
+        if($lang === null)
         {
             // Routine to know language and get header HTTP_ACCEPT_LANGUAGE if there is this variable.
             // the bots like google don't have this variable, in this case we have to complete language data.
+            // We find the language in all cases, then to know the country.
             if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
             {
                 $browserLang = \Syscover\NavTools\Services\NavToolsService::preferentialLanguage(config('navTools.langs'));
@@ -113,6 +115,9 @@ class NavTools
         // Check exceptions
         if($lang !== null && ! in_array($lang, config('navTools.langs')))
         {
+            Cookie::queue(Cookie::forget('userLang'));
+            Cookie::queue(Cookie::forget('userCountry'));
+
             if(env('APP_DEBUG'))
                 throw new ParameterFormatException('Variable lang is not valid value, check NAVTOOLS_LANGS in your environment, will be a 404 error in production');
             else
@@ -125,8 +130,16 @@ class NavTools
         else
             $countries = collect(config(config('navTools.resource')))->flatten();
 
-        if($country !== null && ! $countries->contains(strtoupper($country)))
+        // We make sure to convert the entire array to lowercase
+        $countries->transform(function($item, $key){
+            return strtolower($item);
+        });
+
+        if($country !== null && ! $countries->contains($country))
         {
+            Cookie::queue(Cookie::forget('userLang'));
+            Cookie::queue(Cookie::forget('userCountry'));
+
             if(env('APP_DEBUG'))
                 throw new ParameterFormatException('Variable country is not valid value, check NAVTOOLS_COUNTRIES in your environment, will be a 404 error in production');
             else
