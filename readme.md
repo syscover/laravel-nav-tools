@@ -169,6 +169,12 @@ nt_route('routeName');
 
 You can use **redirect()** helper without any trouble, we have extended Laravel core so that **redirect()->route()** does the same as **nt_route()**.
 
+If you want to change the language or the country you must use this helpers
+```
+change_language('en');
+change_country('us');
+```
+
 ## License
 
 The NavTools is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
