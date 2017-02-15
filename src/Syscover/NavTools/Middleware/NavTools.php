@@ -29,11 +29,17 @@ class NavTools
         // Instance lang or country variable by parameter
         //********************************************************
         // get lang variable from parameters
-        if(isset($paramenters['lang']))
+        if(
+            (config('navTools.urlType') === 'lang-country' || config('navTools.urlType') === 'lang') &&
+            isset($paramenters['lang'])
+        )
             $lang = $paramenters['lang'];
 
         // get country variable from parameters
-        if(isset($paramenters['country']))
+        if(
+            (config('navTools.urlType') === 'lang-country' || config('navTools.urlType') === 'country') &&
+            isset($paramenters['country'])
+        )
             $country = $paramenters['country'];
 
 
@@ -41,8 +47,8 @@ class NavTools
         // Instance lang or country variable by url
         //********************************************************
         if(
-            $request->segment(1) !== null &&
             config('navTools.urlType') === 'lang-country' &&
+            $request->segment(1) !== null &&
             ($lang === null || $country === null)
         )
         {
@@ -124,11 +130,16 @@ class NavTools
                 abort(404);
         }
 
-        // get resource from countries
+        // Get resource from countries,
+        // you can need load countries from other config file
         if(config('navTools.resource') === 'env')
+        {
             $countries = collect(config('navTools.countries'));
+        }
         else
+        {
             $countries = collect(config(config('navTools.resource')))->flatten();
+        }
 
         // We make sure to convert the entire array to lowercase
         $countries->transform(function($item, $key){
