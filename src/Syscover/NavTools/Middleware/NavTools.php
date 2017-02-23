@@ -125,9 +125,13 @@ class NavTools
             Cookie::queue(Cookie::forget('userCountry'));
 
             if(env('APP_DEBUG'))
-                throw new ParameterFormatException('Variable lang is not valid value, check NAVTOOLS_LANGS in your environment, will be a 404 error in production');
+            {
+                throw new ParameterFormatException('Variable lang has value \'' . $lang . '\', is not valid value, check NAVTOOLS_LANGS in your environment, will be a 404 error in production. You may be accessing a url without implementing the language');
+            }
             else
+            {
                 abort(404);
+            }
         }
 
         // Get resource from countries,
