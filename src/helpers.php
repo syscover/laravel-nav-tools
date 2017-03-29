@@ -98,18 +98,30 @@ if (! function_exists('get_lang_route_name'))
      */
     function get_lang_route_name($lang)
     {
-        $route          = \Illuminate\Support\Facades\Route::getCurrentRoute();
-        $routeName      = $route->getName();
-        $originRoute    = substr($routeName, 0, strlen($routeName) - 2);
+        $route = \Illuminate\Support\Facades\Route::getCurrentRoute();
 
-        if(\Illuminate\Support\Facades\Route::has($originRoute . $lang))
+        if($route !== null)
+        {
+            $routeName      = $route->getName();
+            // route without parameter lang
+            $originRoute    = substr($routeName, 0, strlen($routeName) - 2);
+        }
+        else
+        {
+            $routeName      = app('router')->getRoutes()->match(app('request')->create('/'))->getName();
+            // create originRoute to
+            $originRoute    = $routeName;
+        }
+
+        // check routes
+        if (\Illuminate\Support\Facades\Route::has($originRoute . $lang))
         {
             return $originRoute . $lang;
         }
         else
         {
             /// If exist route without lang sum new lang
-            if(\Illuminate\Support\Facades\Route::has($routeName . '-' . $lang))
+            if (\Illuminate\Support\Facades\Route::has($routeName . '-' . $lang))
                 return $routeName . '-' . $lang;
             else
                 return $routeName;
