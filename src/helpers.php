@@ -108,6 +108,7 @@ if (! function_exists('get_lang_route_name'))
         }
         else
         {
+            // if don't exist route, take root route
             $routeName      = app('router')->getRoutes()->match(app('request')->create('/'))->getName();
             // create originRoute to
             $originRoute    = $routeName;
